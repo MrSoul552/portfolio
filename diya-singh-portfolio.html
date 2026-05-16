@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diya Singh — Illustrator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────────────────────────
+       DESIGN TOKENS
+    ───────────────────────────────────────── */
+    :root {
+      --bg:        #0e0b14;
+      --bg2:       #141020;
+      --bg3:       #1a1424;
+      --text:      #f0eaf8;
+      --muted:     rgba(240,234,248,0.5);
+      --faint:     rgba(240,234,248,0.18);
+      --accent:    #b78dff;
+      --accent2:   #c9a0ff;
+      --pink:      #ff4d88;
+      --border:    rgba(255,255,255,0.07);
+      --radius:    4px;
+    }
+
+    /* ─────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(14,11,20,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px; letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      min-height: 92vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 3rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: -160px; right: -100px;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, rgba(155,100,255,0.15), transparent 68%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-tag::before {
+      content: ''; display: inline-block;
+      width: 28px; height: 1px; background: var(--accent);
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 8vw, 92px);
+      font-weight: 700; line-height: 1.04;
+      letter-spacing: -0.025em;
+      max-width: 800px; margin-bottom: 2rem;
+    }
+    .hero-title em { font-style: italic; color: var(--accent2); }
+    .hero-desc {
+      font-size: 16px; font-weight: 300;
+      color: var(--muted); max-width: 480px;
+      line-height: 1.85; margin-bottom: 2.5rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* ─────────────────────────────────────────
+       BUTTONS
+    ───────────────────────────────────────── */
+    .btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 13px 28px; border-radius: 100px;
+      border: none; cursor: pointer;
+      transition: background .2s, transform .15s, border-color .2s;
+    }
+    .btn-primary { background: var(--accent); color: var(--bg); }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--muted);
+      border: 0.5px solid var(--faint);
+    }
+    .btn-outline:hover { border-color: var(--muted); color: var(--text); }
+
+    /* ─────────────────────────────────────────
+       STATS BAR
+    ───────────────────────────────────────── */
+    .stats {
+      display: flex;
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+      margin: 0 3rem 5rem;
+    }
+    .stat {
+      flex: 1; padding: 2rem 1.5rem;
+      border-right: 0.5px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px; font-weight: 700;
+      color: var(--accent2); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(240,234,248,0.35);
+    }
+
+    /* ─────────────────────────────────────────
+       SECTION SHARED
+    ───────────────────────────────────────── */
+    .section { padding: 5rem 3rem; border-top: 0.5px solid var(--border); }
+    .section-label {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px; font-weight: 700;
+    }
+
+    /* ─────────────────────────────────────────
+       FILTER CHIPS
+    ───────────────────────────────────────── */
+    .chips { display: flex; gap: 10px; flex-wrap: wrap; margin: 2rem 0 2.5rem; }
+    .chip {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      border: 0.5px solid rgba(255,255,255,0.12);
+      border-radius: 100px; padding: 6px 18px;
+      cursor: pointer; background: transparent;
+      transition: all .2s;
+    }
+    .chip.active, .chip:hover {
+      background: rgba(183,141,255,0.12);
+      border-color: var(--accent); color: var(--accent2);
+    }
+
+    /* ─────────────────────────────────────────
+       WORK GRID
+    ───────────────────────────────────────── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .work-card {
+      position: relative; overflow: hidden;
+      background: var(--bg3); cursor: pointer;
+      aspect-ratio: 4/3;
+    }
+    /* Cards that should be wider */
+    .work-card.wide { grid-column: span 2; aspect-ratio: auto; min-height: 280px; }
+
+    /* ── IMAGE INSIDE CARD ──
+       Replace the placeholder div below with your real image:
+       */
+    
+    .card-img {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .45s cubic-bezier(0.23,1,0.32,1);
+      background: var(--bg3);
+      font-size: 13px; color: rgba(240,234,248,0.2);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      flex-direction: column; gap: 10px;
+    }
+    .card-img svg { opacity: 0.35; }
+    .work-card:hover .card-img { transform: scale(1.04); }
+
+    .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14,11,20,0.93) 0%, rgba(14,11,20,0.08) 55%, transparent 100%);
+      opacity: 0; transition: opacity .3s;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 1.5rem;
+      z-index: 2;
+    }
+    .work-card:hover .card-overlay { opacity: 1; }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 700;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .card-tag {
+      font-size: 11px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent);
+    }
+
+    /* ─────────────────────────────────────────
+       SERVICES GRID
+    ───────────────────────────────────────── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: var(--border);
+      border: 0.5px solid var(--border); margin-top: 3rem;
+    }
+    .service {
+      background: var(--bg); padding: 2.5rem;
+      transition: background .2s;
+    }
+    .service:hover { background: var(--bg2); }
+    .service-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px; color: rgba(183,141,255,0.35);
+      margin-bottom: 1.5rem;
+    }
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .service-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.75; }
+
+    /* ─────────────────────────────────────────
+       ABOUT
+    ───────────────────────────────────────── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 5rem; align-items: center; margin-top: 3rem;
+    }
+
+    /* ── ABOUT PHOTO ──
+       Replace the placeholder below with your photo:
+       <img src="your-photo.jpg" alt="Diya Singh" style="width:100%;height:100%;object-fit:cover;border-radius:4px;" />
+    */
+    .about-photo {
+      aspect-ratio: 3/4; background: var(--bg3);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      color: rgba(240,234,248,0.15); font-size: 13px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .about-card {
+      position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+      background: rgba(14,11,20,0.82); backdrop-filter: blur(8px);
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 1.25rem;
+    }
+    .about-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; margin-bottom: 3px;
+    }
+    .about-card-sub { font-size: 12px; color: var(--muted); }
+    .about-text { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.9; margin-bottom: 1rem; }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2rem; }
+    .skill-tag {
+      font-size: 12px; color: rgba(240,234,248,0.55);
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: 4px; padding: 5px 12px;
+      background: rgba(183,141,255,0.05);
+    }
+
+    /* ─────────────────────────────────────────
+       CONTACT
+    ───────────────────────────────────────── */
+    .contact {
+      padding: 6rem 3rem;
+      background: #0b0910;
+      text-align: center;
+      border-top: 0.5px solid var(--border);
+    }
+    .contact-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 700; line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .contact-title em { font-style: italic; color: var(--accent2); }
+    .contact-sub { font-size: 15px; font-weight: 300; color: var(--muted); margin-bottom: 2.5rem; }
+    .contact-details {
+      display: flex; justify-content: center;
+      gap: 3rem; margin-top: 3rem; flex-wrap: wrap;
+    }
+    .contact-item-label {
+      font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(240,234,248,0.3);
+      margin-bottom: 4px;
+    }
+    .contact-item-value { font-size: 14px; color: rgba(240,234,248,0.7); }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    footer {
+      padding: 1.75rem 3rem;
+      border-top: 0.5px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 15px; color: rgba(240,234,248,0.3); }
+    .footer-copy { font-size: 12px; color: rgba(240,234,248,0.18); }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .stats { margin: 0 1.5rem 3rem; flex-wrap: wrap; }
+      .stat { min-width: 50%; border-bottom: 0.5px solid var(--border); }
+      .section { padding: 3.5rem 1.5rem; }
+      .work-grid { grid-template-columns: 1fr; }
+      .work-card.wide { grid-column: span 1; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact { padding: 4rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">Diya Singh</div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag">Illustrator · New Delhi</div>
+  <h1 class="hero-title">Stories told<br>through <em>art &amp; colour</em></h1>
+  <p class="hero-desc">
+    I create illustrations that breathe life into characters, worlds, and ideas —
+    from animation storyboards to children's books and vector art.
+  </p>
+  <div class="hero-cta">
+    <a href="#work" class="btn btn-primary">View my work ↓</a>
+    <a href="#contact" class="btn btn-outline">Hire me</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS
+═══════════════════════════════════════════ -->
+<div class="stats">
+  <!-- ✏️ Update these numbers to reflect your actual experience -->
+  <div class="stat">
+    <div class="stat-num">4+</div>
+    <div class="stat-label">Specialisations</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">30+</div>
+    <div class="stat-label">Projects completed</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Countries reached</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5+</div>
+    <div class="stat-label">Years experience</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     WORK
+═══════════════════════════════════════════ -->
+<section class="section" id="work">
+  <div class="section-label">Selected work</div>
+  <div class="section-title">Portfolio</div>
+
+  <div class="chips">
+    <button class="chip active" onclick="filterWork('all', this)">All</button>
+    <button class="chip" onclick="filterWork('animation', this)">Animation</button>
+    <button class="chip" onclick="filterWork('childrens', this)">Children's books</button>
+    <button class="chip" onclick="filterWork('vector', this)">Vector art</button>
+    <button class="chip" onclick="filterWork('personal', this)">Personal</button>
+  </div>
+
+  <div class="work-grid" id="workGrid">
+
+    <!-- ══════════════════════════════════════
+         CARD 1 — ANIMATION (wide)
+         ✏️ TO ADD YOUR IMAGE:
+         Replace the entire <div class="card-img"> block with:
+         <img src="images/animation-scene.jpg" alt="Animation project — café scene" />
+    ══════════════════════════════════════ -->
+    <div class="work-card wide" data-category="animation">
+    
+    <img src="C:\Users\harsh\Downloads\sukuna gif banner.jpg"
+         alt="Sukuna Dark Domain"
+         class="card-img">
+
+    <div class="card-overlay">
+        <div class="card-title">Sukuna Dark Domain</div>
+        <div class="card-tag">Animation · Dark Theme</div>
+    </div>
+
+</div>
+
+    <!-- ══════════════════════════════════════
+         CARD 2 — VECTOR ART
+         ✏️ TO ADD YOUR IMAGE:
+         Replace the <div class="card-img"> block with:
+         <img src="images/vector-art.jpg" alt="Vector art illustration" />
+    ══════════════════════════════════════ -->
+    <div class="work-card" data-category="vector">
+      <div class="card-img">
+        <!-- 🖼️ ADD IMAGE HERE — recommended size: 600×450px -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 14.14 14.14"/></svg>
+        Add your vector artwork here
+      </div>
+      <div class="card-overlay">
+        <div class="card-title">Vector art</div>
+        <div class="card-tag">Digital · Vector · Character</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 3 — CHILDREN'S BOOK
+         ✏️ TO ADD YOUR IMAGE:
+         Replace the <div class="card-img"> block with:
+         <img src="images/childrens-book-1.jpg" alt="Children's book illustration" />
+    ══════════════════════════════════════ -->
+    <div class="work-card" data-category="childrens">
+      <div class="card-img">
+        <!-- 🖼️ ADD IMAGE HERE — recommended size: 600×450px -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+        Add your children's book artwork here
+      </div>
+      <div class="card-overlay">
+        <div class="card-title">Children's book illustrations</div>
+        <div class="card-tag">Publishing · Editorial · Narrative</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 4 — PERSONAL PROJECT
+         ✏️ TO ADD YOUR IMAGE:
+         Replace the <div class="card-img"> block with:
+         <img src="images/personal-1.jpg" alt="Personal project — rainy night scene" />
+    ══════════════════════════════════════ -->
+    <div class="work-card" data-category="personal">
+      <div class="card-img">
+        <!-- 🖼️ ADD IMAGE HERE — recommended size: 600×450px -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+        Add your personal artwork here
+      </div>
+      <div class="card-overlay">
+        <div class="card-title">Personal projects</div>
+        <div class="card-tag">Personal · Experimental · Editorial</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 5 — CHILDREN'S BOOK 2
+         ✏️ TO ADD YOUR IMAGE:
+         Replace the <div class="card-img"> block with:
+         <img src="images/childrens-book-2.jpg" alt="Children's book — arctic explorer" />
+    ══════════════════════════════════════ -->
+    <div class="work-card" data-category="childrens">
+      <div class="card-img">
+        <!-- 🖼️ ADD IMAGE HERE — recommended size: 600×450px -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+        Add your children's book artwork here
+      </div>
+      <div class="card-overlay">
+        <div class="card-title">Children's book — arctic explorer</div>
+        <div class="card-tag">Publishing · Historical</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 6 — PERSONAL / FOLK ART (wide)
+         ✏️ TO ADD YOUR IMAGE:
+         Replace the <div class="card-img"> block with:
+         <img src="images/folk-bird.jpg" alt="Folk bird — Madhubani inspired" />
+    ══════════════════════════════════════ -->
+    <div class="work-card wide" data-category="personal">
+      <div class="card-img">
+        <!-- 🖼️ ADD IMAGE HERE — recommended size: 900×500px -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Add your folk / personal artwork here
+      </div>
+      <div class="card-overlay">
+        <div class="card-title">Folk bird — Madhubani inspired</div>
+        <div class="card-tag">Personal · Indian folk art · Pattern</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 7 — ANIMATION 2
+         ✏️ TO ADD YOUR IMAGE:
+         Replace the <div class="card-img"> block with:
+         <img src="images/animation-night.jpg" alt="Rooftop night scene" />
+    ══════════════════════════════════════ -->
+    <div class="work-card" data-category="animation">
+      <div class="card-img">
+        <!-- 🖼️ ADD IMAGE HERE — recommended size: 600×450px -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        Add your animation artwork here
+      </div>
+      <div class="card-overlay">
+        <div class="card-title">Night contemplation — rooftop scene</div>
+        <div class="card-tag">Animation · Mood · Atmospheric</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 8 — VECTOR / CHARACTER
+         ✏️ TO ADD YOUR IMAGE:
+         Replace the <div class="card-img"> block with:
+         <img src="images/character-design.jpg" alt="Character design" />
+    ══════════════════════════════════════ -->
+    <div class="work-card" data-category="vector">
+      <div class="card-img">
+        <!-- 🖼️ ADD IMAGE HERE — recommended size: 600×450px -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+        Add your character design here
+      </div>
+      <div class="card-overlay">
+        <div class="card-title">Character design</div>
+        <div class="card-tag">Vector · Character · Concept</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CARD 9 — ADD A NEW PROJECT
+         ✏️ Duplicate this block to add more work.
+         Change data-category to: animation / childrens / vector / personal
+    ══════════════════════════════════════ -->
+    <div class="work-card" data-category="personal">
+      <div class="card-img">
+        <!-- 🖼️ ADD IMAGE HERE -->
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+        Add more of your work here
+      </div>
+      <div class="card-overlay">
+        <div class="card-title">Your project title</div>
+        <div class="card-tag">Category · Style</div>
+      </div>
+    </div>
+
+  </div><!-- /work-grid -->
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SERVICES
+═══════════════════════════════════════════ -->
+<section class="section" id="services">
+  <div class="section-label">What I do</div>
+  <div class="section-title">Services</div>
+  <!-- ✏️ Edit service names and descriptions below -->
+  <div class="services-grid">
+    <div class="service">
+      <div class="service-num">01</div>
+      <div class="service-name">Animation illustration</div>
+      <div class="service-desc">Frame-by-frame illustration for animated projects — storyboards, scene backgrounds, and character turnarounds ready for production.</div>
+    </div>
+    <div class="service">
+      <div class="service-num">02</div>
+      <div class="service-name">Children's books</div>
+      <div class="service-desc">Warm, expressive illustrations for picture books and educational publications. Full spreads to spot illustrations.</div>
+    </div>
+    <div class="service">
+      <div class="service-num">03</div>
+      <div class="service-name">Vector &amp; editorial art</div>
+      <div class="service-desc">Clean, scalable vector artwork for brands, magazines, and digital products. Any style, any complexity.</div>
+    </div>
+    <div class="service">
+      <div class="service-num">04</div>
+      <div class="service-name">Character design</div>
+      <div class="service-desc">Original characters from concept to final sheet — for games, apps, merchandise, and storytelling projects.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="about-grid">
+
+    <!-- ✏️ TO ADD YOUR PHOTO:
+         Replace the inner content of .about-photo with:
+         <img src="images/diya-photo.jpg" alt="Diya Singh" style="width:100%;height:100%;object-fit:cover;" />
+         Then remove the about-card div if you like, or keep it as an overlay. -->
+    <div class="about-photo">
+      <!-- 🖼️ ADD YOUR PHOTO HERE — recommended: portrait, 600×800px -->
+      <span style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:rgba(240,234,248,0.15);">Add your photo here</span>
+      <div class="about-card">
+        <div class="about-card-name">Diya Singh — Illustrator</div>
+        <div class="about-card-sub">New Delhi, India · Available for projects</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">About me</div>
+      <h2 class="section-title" style="margin-bottom:1.5rem;">Illustrator with a love for storytelling</h2>
+      <!-- ✏️ Edit this bio to be in your own words -->
+      <p class="about-text">
+        I'm Diya Singh, an illustrator based in New Delhi. I work across animation, children's publishing, editorial, and personal art — bringing warmth and narrative depth to every piece.
+      </p>
+      <p class="about-text">
+        My work spans multiple styles and genres, from emotionally resonant animation frames to playful vector characters — always driven by the story at the heart of the image.
+      </p>
+      <!-- ✏️ Add or remove skill tags as needed -->
+      <div class="skills-list">
+        <span class="skill-tag">Digital illustration</span>
+        <span class="skill-tag">Character design</span>
+        <span class="skill-tag">Storyboarding</span>
+        <span class="skill-tag">Vector art</span>
+        <span class="skill-tag">Children's books</span>
+        <span class="skill-tag">Procreate</span>
+        <span class="skill-tag">Adobe Illustrator</span>
+        <span class="skill-tag">Photoshop</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="section-label" style="margin-bottom:1rem;">Get in touch</div>
+  <h2 class="contact-title">Let's create<br>something <em>beautiful</em></h2>
+  <!-- ✏️ Update your email below -->
+  <p class="contact-sub">Open to commissions, collaborations, and full-time opportunities.</p>
+  <a href="mailto:sdiya2784@gmail.com" class="btn btn-primary">Send an email ↗</a>
+  <div class="contact-details">
+    <!-- ✏️ Update your contact details below -->
+    <div class="contact-item">
+      <div class="contact-item-label">Email</div>
+      <div class="contact-item-value">sdiya2784@gmail.com</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-label">Phone</div>
+      <div class="contact-item-value">+91 8004914983</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-label">Location</div>
+      <div class="contact-item-value">New Delhi, India</div>
+    </div>
+    <!-- ✏️ Add your Instagram / Behance / Dribbble links here -->
+    <!--
+    <div class="contact-item">
+      <div class="contact-item-label">Instagram</div>
+      <div class="contact-item-value"><a href="https://instagram.com/yourhandle" style="color:var(--accent);">@yourhandle</a></div>
+    </div>
+    -->
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-name">Diya Singh</div>
+  <div class="footer-copy">© 2026 · All rights reserved</div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT — Filter & interactions
+═══════════════════════════════════════════ -->
+<script>
+  /* Filter work cards by category */
+  function filterWork(category, btn) {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.work-card').forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = '';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity .3s ease, transform .3s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 20);
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  /* Smooth appear on scroll */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.work-card, .service, .stat').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
